@@ -35,6 +35,6 @@ describe('UserController', () => {
     await appController.create(params, res)
 
     expect(res.status).toHaveBeenCalledWith(200)
-    expect(res.json).toHaveBeenCalledWith({ data: 1 })
+    expect(res.json).toHaveBeenCalledWith(1)
   })
 })

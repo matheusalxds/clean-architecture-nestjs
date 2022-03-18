@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Res } from '@nestjs/common'
 import { CreateUserHandler, LoadUsersHandler } from '@/application/controllers'
-import { Response } from 'express'
+import { RequestHandler, Response } from 'express'
+import { adaptNestRouter } from '@/main/adapters'
 
 @Controller()
 export class UserRoutes {
@@ -10,14 +11,12 @@ export class UserRoutes {
   ) {}
 
   @Post()
-  async create (@Body() body: CreateUserHandler.Input, @Res() res: Response): Promise<Response> {
-    const { statusCode, data = {} } = await this.createUserHandler.handle(body)
-    return res.status(statusCode).json({ data })
+  async create (@Body() body: CreateUserHandler.Input, @Res() res: Response): Promise<RequestHandler> {
+    return adaptNestRouter(this.createUserHandler)(body, res)
   }
 
   @Get()
-  async load (@Body() body: CreateUserHandler.Input, @Res() res: Response): Promise<Response> {
-    const { statusCode, data } = await this.loadUsersHandler.handle(body)
-    return res.status(statusCode).json({ data })
+  async load (@Body() body: CreateUserHandler.Input, @Res() res: Response): Promise<RequestHandler> {
+    return adaptNestRouter(this.loadUsersHandler)(body, res)
   }
 }

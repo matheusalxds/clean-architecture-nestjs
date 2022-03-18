@@ -32,11 +32,10 @@ describe('/users (e2e)', () => {
       const { status, body } = await request(app.getHttpServer()).get('/users')
 
       expect(status).toBe(200)
-      expect(body).toEqual({
-        data: [
-          { id: 1, email: 'any_email', name: 'any_name' },
-          { id: 2, email: 'any_email_2', name: 'any_name_2' }]
-      })
+      expect(body).toEqual([
+        { id: 1, email: 'any_email', name: 'any_name' },
+        { id: 2, email: 'any_email_2', name: 'any_name_2' }
+      ])
     })
   })
 
@@ -47,7 +46,7 @@ describe('/users (e2e)', () => {
         .send({ name: 'any_name', email: 'any_email' })
 
       expect(status).toBe(200)
-      expect(body).toEqual({ data: 1 })
+      expect(body).toEqual(1)
     })
   })
 })
