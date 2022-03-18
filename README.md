@@ -40,7 +40,33 @@ a few tables to large scale enterprise applications with multiple databases.
 $ npm install
 ```
 
+### Creating the database
+
+Before we start the application, it's necessary to create our database.
+
+It's very simple to create our migration files, as simple as you can think, you just need to run
+the following command:
+
+```bash
+$ npm gen:migration <migration_name>
+```
+If you want to execute the migration file, you need to run the following command:
+
+```bash
+$ npm run:migration
+```
+
+Sometimes, we need to revert the migration, so we need to run the following command:
+
+```bash
+$ npm rev:migration
+```
+
+If you prefer to use the documentation for this, you can find it [here](https://orkhan.gitbook.io/typeorm/docs/migrations).
+
 ### Running the app
+
+After you create the database, it is possible to start the application with the following command:
 
 ```bash
 # development
