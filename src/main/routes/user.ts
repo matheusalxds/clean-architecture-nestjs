@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common'
-import { CreateUserHandler, LoadUsersHandler } from '@/application/controllers'
-import { RequestHandler, Response } from 'express'
 import { adaptNestRouter } from '@/main/adapters'
+import { CreateUserHandler, LoadUsersHandler } from '@/application/controllers'
+
+import { Body, Controller, Get, Post, Res } from '@nestjs/common'
+import { RequestHandler, Response } from 'express'
 
 @Controller()
 export class UserRoutes {

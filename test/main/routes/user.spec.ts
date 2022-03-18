@@ -1,12 +1,12 @@
 import { UserRoutes } from '@/main/routes'
 import { ControllerHandlersModule } from '@/application/controllers'
 import { PgTestHelper } from '@/test/infra/db/pg/helper'
-import { mockUserInput } from '@/test/domain/mocks'
+import { mockUserInput } from '@/test/application/mocks'
 
 import { Test, TestingModule } from '@nestjs/testing'
+import { getMockRes } from '@jest-mock/express'
 import { getConnection } from 'typeorm'
 import { Response } from 'express'
-import { getMockRes } from '@jest-mock/express'
 
 describe('UserController', () => {
   let appController: UserRoutes

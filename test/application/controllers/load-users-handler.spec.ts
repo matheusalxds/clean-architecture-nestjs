@@ -1,22 +1,19 @@
 import { LoadUsersHandler, Controller } from '@/application/controllers'
 import { LoadUsersUC } from '@/domain/use-cases'
 import { User } from '@/domain/entities'
-import { mockUserInput } from '@/test/domain/mocks'
+import { mockUser } from '@/test/domain/mocks'
 
 import { mock, MockProxy } from 'jest-mock-extended'
-
-const mockUser = (): User => ({
-  id: 1,
-  ...mockUserInput()
-})
 
 describe('LoadUsersController', () => {
   let loadUsers: MockProxy<LoadUsersUC>
   let sut: LoadUsersHandler
+  let user: User
 
   beforeAll(() => {
+    user = mockUser()
     loadUsers = mock()
-    loadUsers.execute.mockResolvedValue([mockUser()])
+    loadUsers.execute.mockResolvedValue([user])
   })
 
   beforeEach(() => {
@@ -39,7 +36,7 @@ describe('LoadUsersController', () => {
 
     expect(httpResponse).toEqual({
       statusCode: 200,
-      data: [mockUser()]
+      data: [user]
     })
   })
 })

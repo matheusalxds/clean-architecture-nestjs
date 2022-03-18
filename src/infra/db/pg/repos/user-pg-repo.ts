@@ -15,7 +15,6 @@ export class UserPgRepo implements UserRepository {
 
   async load (): Promise<Load.Output> {
     const pgRepo = getRepository(UserEntity)
-    const users = await pgRepo.find()
-    return users
+    return pgRepo.find()
   }
 }

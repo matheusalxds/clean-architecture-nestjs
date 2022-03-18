@@ -1,6 +1,7 @@
 import { AppModule } from '@/main/factories/app.module'
 import { PhoneEntity, UserEntity } from '@/infra/db/pg/entities'
 import { PgTestHelper } from '@/test/infra/db/pg/helper'
+import { mockUserInput } from '@/test/application/mocks'
 
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
@@ -43,7 +44,7 @@ describe('/users (e2e)', () => {
     it('/', async () => {
       const { status, body } = await request(app.getHttpServer())
         .post('/users')
-        .send({ name: 'any_name', email: 'any_email' })
+        .send(mockUserInput())
 
       expect(status).toBe(200)
       expect(body).toEqual(1)

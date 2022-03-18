@@ -1,15 +1,19 @@
 import { UserRepository } from '@/domain/contracts/repos'
 import { LoadUsersUC } from '@/domain/use-cases'
+import { mockUser } from '@/test/domain/mocks'
+import { User } from '@/domain/entities'
 
 import { MockProxy, mock } from 'jest-mock-extended'
 
 describe('CreateUser UseCase', () => {
   let userRepo: MockProxy<UserRepository>
   let sut: LoadUsersUC
+  let user: User
 
   beforeAll(() => {
+    user = mockUser()
     userRepo = mock()
-    userRepo.load.mockResolvedValue([{ id: 1, email: 'any_email', name: 'any_name' }])
+    userRepo.load.mockResolvedValue([user])
   })
 
   beforeEach(() => {
@@ -34,6 +38,6 @@ describe('CreateUser UseCase', () => {
   test('should return 1 if UserRepo returns 1', async () => {
     const users = await sut.execute()
 
-    expect(users).toEqual([{ id: 1, email: 'any_email', name: 'any_name' }]);
+    expect(users).toEqual([{ id: user.id, email: user.email, name: user.name }])
   })
 })

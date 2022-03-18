@@ -1,8 +1,6 @@
 import { ServerError } from '@/application/errors'
-import { Controller } from '@/application/controllers/controller'
+import { Controller } from '@/application/controllers'
 import { HttpResponse } from '@/application/helpers'
-
-const mockHttpRequest = () => ({ email: 'matheus.silva@gaivota.ai', name: 'Matheus' })
 
 class ControllerStub extends Controller {
   result: HttpResponse = {
@@ -15,7 +13,7 @@ class ControllerStub extends Controller {
   }
 }
 
-describe('CreateUserController', () => {
+describe('Controller', () => {
   let sut: ControllerStub
 
   beforeEach(() => {
@@ -30,7 +28,7 @@ describe('CreateUserController', () => {
     const error = new Error('perform_error')
     jest.spyOn(sut, 'perform').mockRejectedValueOnce(error)
 
-    const httpResponse = await sut.handle(mockHttpRequest())
+    const httpResponse = await sut.handle({ data: 'any_data' })
 
     expect(httpResponse).toEqual({
       statusCode: 500,
@@ -38,7 +36,7 @@ describe('CreateUserController', () => {
     })
   })
 
-  test('should return the result of perfom', async () => {
+  test('should return the result of perform', async () => {
     const httpResponse = await sut.handle('any_value')
 
     expect(httpResponse).toEqual(sut.result)

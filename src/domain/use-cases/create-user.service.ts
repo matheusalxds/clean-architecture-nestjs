@@ -1,4 +1,5 @@
 import { UserPgRepo } from '@/infra/db/pg/repos'
+import { Create } from '@/domain/contracts/repos'
 
 import { Injectable } from '@nestjs/common'
 
@@ -12,6 +13,6 @@ export class CreateUserUC {
 }
 
 export namespace CreateUserUC {
-  export type Input = { name: string, email: string }
-  export type Output = number
+  export type Input = Create.Input
+  export type Output = Create.Output
 }
