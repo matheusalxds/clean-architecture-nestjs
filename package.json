@@ -12,8 +12,10 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint .",
+    "lint:fix": "yarn lint -- --fix",
     "test": "jest --runInBand",
+    "test:staged": "yarn test -- --findRelatedTests",
     "test:cov": "yarn test -- --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:unit": "yarn test -- --watch --config=jest-unit-config.js",
@@ -24,7 +26,8 @@
     "create:migration": "typeorm migration:create -n",
     "gen:migration": "typeorm migration:generate -n",
     "run:migration": "typeorm migration:run",
-    "rev:migration": "typeorm migration:revert"
+    "rev:migration": "typeorm migration:revert",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -54,7 +57,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.2.5",
+    "lint-staged": "^12.3.7",
     "pg-mem": "^2.3.3",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
